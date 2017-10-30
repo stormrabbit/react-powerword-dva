@@ -13,8 +13,6 @@
 
 .welcome {
   height: 328px;
-  background: url(../assets/yay.jpg) no-repeat center 0;
-  background-size: 388px 328px;
 }
 
 .list {
@@ -26,4 +24,28 @@
 
 .list code {
   background: #f7f7f7;
+}
+
+#components-layout-demo-top .logo {
+  width: 120px;
+  height: 100%;
+  background: #333;
+  border-radius: 6px;
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+.content {
+  /* height: 100%; */
+  padding: 24px;
+  height: 100%;
+
+}
+
+.content2 {
+  background: #fff;
+  height: 100%;
+  /* position: absolute;
+  top: 0px;
+  bottom: 0px; */
 }
