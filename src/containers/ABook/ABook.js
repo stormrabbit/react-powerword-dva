@@ -1,21 +1,23 @@
 import React from 'react';
-import styles from './App.css';
+import styles from './ABook.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 import {TopMenu} from '../../components/index';
-function IndexPage(props) {
+import {parseURL} from '../../utils/utils';
+
+function ABook(props) {
   const clientHeight = document.body.clientHeight;
-  console.log('clientHeight==>',clientHeight );
-  console.log('css')
+  const path = parseURL( window.document.location.href).path;
+  const currentPath = [];
+  currentPath.push(path);
   return (
   <div>
     <Layout className="layout" style= {{width: '100%', position: 'absolute', top: '0px', bottom: '0px'}}>
       <Header>
         <div className="logo" />
-        <TopMenu />
+        <TopMenu CurrentPath={currentPath}/>
       </Header>
       <Content className={styles.content}>
-        {/* <div className="content2" style={{minHeight: clientHeight}}> */}
         <div className={styles.content2}>
         {props.children}
         </div>
@@ -28,4 +30,4 @@ function IndexPage(props) {
   );
 }
 
-export default (IndexPage);
+export default ABook;

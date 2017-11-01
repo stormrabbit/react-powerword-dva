@@ -2,18 +2,31 @@ import React from 'react';
 import styles from './Menu.css';
 import { Menu } from 'antd';
 import { routes } from '../../../routes/routes';
-function TopMenu() {
+import {connect} from 'dva';
+import {routerRedux} from 'dva/router';
+
+function TopMenu({CurrentPath, dispatch}) {
+  const handeClick = (e) => {
+    const {
+      key
+    } = e;
+    dispatch(routerRedux.push(key));
+  }
+
   return (
     <Menu
       theme="dark"
       mode="horizontal"
-      defaultSelectedKeys={['2']}
+      onClick = {(e)=>{
+        handeClick(e);
+      }}
+      selectedKeys={CurrentPath}
       style={{ lineHeight: '64px' }}
     >
       {
         routes.map((route, index) => {
           if(!route.hidden){
-            return (<Menu.Item key={index+1}>{route.compName}</Menu.Item>);
+            return (<Menu.Item key={route.path} >{route.compName}</Menu.Item>);
           }
         })
       }
@@ -21,4 +34,4 @@ function TopMenu() {
   );
 }
 
-export default TopMenu;
+export default connect()(TopMenu);

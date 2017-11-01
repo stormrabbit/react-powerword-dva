@@ -8,12 +8,16 @@ const routes = [{
     path: '/about',
     comp: 'About',
     compName: '关于'
+},{
+    path: '/test',
+    comp: 'Test',
+    compName: '测试'
 }, {
     path: '*',
     comp: 'NotFound',
     compName: '未找到',
     hidden: 1
-},];
+}];
 
 // const getAllRoutes = () => {
 //     console.log(Object.keys(allRoutes))
