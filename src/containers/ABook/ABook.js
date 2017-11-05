@@ -4,6 +4,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 import {TopMenu} from '../../components/index';
 import {parseURL} from '../../utils/utils';
+import {connect} from 'dva';
 
 function ABook(props) {
   const clientHeight = document.body.clientHeight;
@@ -30,4 +31,4 @@ function ABook(props) {
   );
 }
 
-export default ABook;
+export default connect()( ABook);

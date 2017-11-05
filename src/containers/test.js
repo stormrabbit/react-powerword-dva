@@ -1,32 +1,13 @@
 import React from 'react';
-import { connect } from 'dva';
-// import styles from './NoteTemplateDetail.less';
-import {
-  Form,
-  Input
-} from 'antd';
-import FormItemBuilder from '../utils/FormItemBuilder';
+import styles from './Test.css';
+import connect from 'dva';
 
-const FormItem = Form.Item;
-
-function Test(props) {
-  const {
-        getFieldDecorator
-      } = props.form;
-
-  console.log('hello,builder==>\n', JSON.stringify(FormItemBuilder
-    .create('hello').addParams('name', 'world').build()))
+function Test() {
   return (
-    <Form>
-      <FormItem>
-        {getFieldDecorator('test')(<Input />)}
-      </FormItem>
-    </Form>
+    <div className={styles.normal}>
+      Hello, Test
+    </div>
   );
 }
 
-function mapStateToProps(store) {
-  return { store };
-}
-
-export default Form.create()(connect(mapStateToProps)(Test));
+export default Test;

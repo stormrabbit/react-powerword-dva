@@ -8,7 +8,7 @@ import ABook from './ABook/ABook';
 import HostPage from './HostPage/HostPage';
 import NotFound from './NotFound/NotFound';
 import About from './About/About';
-import Test from './test';
+import Test from './Test';
 
 
 // const buildComp = (compName) => {
@@ -22,4 +22,9 @@ import Test from './test';
 //     containers[container.name] = buildComp(container);
 // })
 
-export default {ABook, HostPage, NotFound, About, Test};
+const containers = {
+  ABook, HostPage, Test, About, NotFound
+}
+// export default containers;
+
+module.exports = containers;
