@@ -1,30 +1,75 @@
-// export ABook from './ABook/ABook';
-// export HostPage from './HostPage/HostPage';
-// export NotFound from './NotFound/NotFound';
-// export About from './About/About';
-// export Test from './test';
-
 import ABook from './ABook/ABook';
 import HostPage from './HostPage/HostPage';
 import NotFound from './NotFound/NotFound';
 import About from './About/About';
-import Test from './Test';
+import { txtTools } from 'eschew-materials';
+
+const hiddenConstainers = { ABook, HostPage, NotFound };
+
+const MenuBuilder = (function () {
+
+  let instance;
+
+  const init = () => {
+    const obj = {};
+
+    function addMenu(menuContainer, menuName) {
+      obj[menuContainer] = menuName;
+      return instance;
+    }
+
+    const build = () => {
+      return obj;
+    }
+    return {
+      addMenu,
+      build
+    }
+  }
+  return {
+    getInstance: () => {
+      if (!instance) {
+        instance = init();
+      }
+      return instance;
+    }
+  }
+
+}())
 
 
-// const buildComp = (compName) => {
-//     return {comp:compName, path: `/${compName.name}`}
-// }
+const displayMenus = MenuBuilder.getInstance()
+  .addMenu('About', '关于')
+  .build()
 
-// // console.log('test==>', ABook.name);
-// const containers = {};
-// [ABook, HostPage, NotFound, About, Test].map( container => {
-//     console.log('container.name==>', container.name)
-//     containers[container.name] = buildComp(container);
-// })
+const buildMenus = (containers) => {
+  const menus = [];
+  menus.push({
+    path: '/',
+    comp: HostPage,
+    compName: '主页',
+  });
 
-const containers = {
-  ABook, HostPage, Test, About, NotFound
+  Object.keys(containers).filter(key => !hiddenConstainers[key]).map(key => {
+    const rtObj = {
+      path: `/${txtTools.head2LowerCase(key)}`,
+      comp: containers[key],
+      compName: displayMenus[key]
+    };
+    menus.push(rtObj);
+  });
+
+  menus.push({
+    path: '*',
+    comp: NotFound,
+    compName: '未找到',
+    hidden: 1
+  });
+  return menus;
 }
-// export default containers;
 
-module.exports = containers;
+const containers = { ABook, HostPage, NotFound, About };
+const menus = buildMenus(containers);
+containers.Menu = menus;
+
+export default containers;

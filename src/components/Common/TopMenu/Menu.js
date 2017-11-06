@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './Menu.css';
 import { Menu } from 'antd';
-import { routes } from '../../../routes/routes';
+// import { routes } from '../../../routes/routes';
+import * as containers from '../../../containers/index';
+
 import {connect} from 'dva';
 import {routerRedux} from 'dva/router';
 
@@ -12,7 +14,9 @@ function TopMenu({CurrentPath, dispatch}) {
     } = e;
     dispatch(routerRedux.push(key));
   }
-
+  const routes = containers.default.Menu;
+  
+  // console.log('routes==>',  CurrentPath);
   return (
     <Menu
       theme="dark"
