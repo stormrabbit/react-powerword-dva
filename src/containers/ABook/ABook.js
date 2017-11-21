@@ -19,14 +19,7 @@ function ABook(props) {
       </Header>
       <Content className={styles.content}>
         <div className={styles.content2}>
-            <Row type="flex" justify="center" align="top" style={{height: '100%'}}>
-              <Col span={12}>
-                {props.children}
-              </Col>
-              <Col span={12} style={{height: '100%'}}>
-                <Input.TextArea style={{width: '100%', height: '100%'}}/>
-              </Col>
-            </Row>
+          {props.children}
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
