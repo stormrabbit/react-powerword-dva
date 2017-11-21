@@ -4,6 +4,7 @@ import NotFound from './NotFound/NotFound';
 import About from './About/About';
 import ParseService from './ParseService/ParseService';
 import ParseFrom from './ParseFrom/ParseForm';
+import ParseChinese from './ParseChinese/ParseChinese';
 
 import { txtTools } from 'eschew-materials';
 
@@ -44,6 +45,7 @@ const MenuBuilder = (function () {
 const displayMenus = MenuBuilder.getInstance()
   .addMenu('ParseService', '生成 service')
   .addMenu('ParseFrom', '生成 From')
+  .addMenu('ParseChinese', '双语转换')
   .addMenu('About', '关于')
   .build()
 
@@ -73,7 +75,8 @@ const buildMenus = (containers) => {
   return menus;
 }
 
-const containers = { ABook, HostPage, NotFound, About, ParseService, ParseFrom };
+const addMenus = {ParseService, ParseFrom, ParseChinese}
+const containers = { ABook, HostPage, ...addMenus, NotFound, About };
 const menus = buildMenus(containers);
 containers.Menu = menus;
 
