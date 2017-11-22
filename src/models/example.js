@@ -18,12 +18,27 @@ export default {
   },
 
   effects: {
+    *takeFork({payload}, sagas) {
+      console.log('takeFork==>', payload);
+      const test = yield payload.done;
+      console.log('test==>', test);
+    },
     *fetch({ payload }, { call, put, fork }) {  // eslint-disable-line
       // console.log('delay==>', delay);
       const delay = time => new Promise ( res => {
         console.log('delaying...');
         setTimeout(() => res('delay over!'), time);
       })
+
+      // const tsk = yield fork(delay, 5000);
+      // const tsk2 = yield fork(delay, 6000);
+      // const tsk3 = yield fork(delay, 7000);
+      // const tsk4 = yield fork(delay , 8000);
+      // yield put({
+      //   type: 'takeFork',
+      //   payload: tsk
+      // });
+      // console.log('tsk==>', tsk);
       // const sleep = function (time) {
       //   return new Promise(function (resolve, reject) {
       //     setTimeout(function () {
@@ -31,8 +46,62 @@ export default {
       //     }, time);
       //   })
       // };
-      const msg = yield call(delay, 5000);
-      console.log('msg==>over', msg);
+      // const arrs = [];
+      // for (let i =0;i< 4;i ++){
+      //   arrs.push(call(delay, (5+i) * 1000))
+      // }
+      const arrs2 = [];
+      for (let i =0;i< 4;i ++){
+        arrs2.push(yield fork(delay, (5+i) * 1000))
+      }
+      const forkAction = (tsk) => {
+        return put({
+          type: 'takeFork',
+          payload: tsk
+        });
+      }
+
+      for (let i in arrs2) {
+        yield forkAction(arrs2[i]);
+      }
+
+      const [tsk1] = arrs2;
+      if(tsk1.isRunning()) {
+        tsk1.cancel();
+      }
+      console.log(tsk1.isRunning())
+      // yield put({
+      //   type: 'takeFork',
+      //   payload: arrs2[1]
+      // });
+      // yield put({
+      //   type: 'takeFork',
+      //   payload: arrs2[2]
+      // });
+      // yield put({
+      //   type: 'takeFork',
+      //   payload: arrs2[3]
+      // });
+      
+      // arrs2.forEach(tsk => yield put({
+      //   type: 'takeFork',
+      //   payload: tsk
+      // }))
+      // const [tsk1 ,tsk2 ,tsk3 ,tsk4] = yield arrs2;
+      // arrs2.forEach( yi)
+      // console.log('tsk==>', tsk1);
+      // console.log('tsk==>', tsk2);
+      // console.log('tsk==>', tsk3);
+      // console.log('tsk==>', tsk4);
+      // const msg1 = yield call(delay, 5000);
+      // const msg2 = yield call(delay, 5000);
+      // const msg3 = yield call(delay, 5000);
+      // const msg4 = yield call(delay, 5000);
+      // const [msg1, msg2, msg3, msg4] = yield arrs;
+      // console.log('msg==>over', msg1);
+      // console.log('msg==>over', msg2);
+      // console.log('msg==>over', msg3);
+      // console.log('msg==>over', msg4);
     },
   },
 
