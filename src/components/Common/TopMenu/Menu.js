@@ -6,7 +6,7 @@ import * as containers from '../../../containers/index';
 
 import {connect} from 'dva';
 import {routerRedux} from 'dva/router';
-
+import {hocUtils} from '../../../utils/hocUtils';
 function TopMenu({CurrentPath, dispatch}) {
   const handeClick = (e) => {
     const {
@@ -38,4 +38,4 @@ function TopMenu({CurrentPath, dispatch}) {
   );
 }
 
-export default connect()(TopMenu);
+export default hocUtils(connect()(TopMenu));
