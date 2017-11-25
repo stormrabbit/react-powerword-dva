@@ -36,14 +36,22 @@ import {
 // custom_func(obj3, 'showWord').showWord();
 
 
-const initState = store.getState();
-console.log('init==>', initState);
-store.dispatch({type: '+'});
+// const initState = store.getState();
+// console.log('init==>', initState);
+// store.dispatch({type: '+'});
 
-const nextState = store.getState();
-console.log('next==>', nextState);
+// const nextState = store.getState();
+// console.log('next==>', nextState);
 
-addMiddleware();
+// addMiddleware();
 
-store.dispatch({type: '+'});
-console.log('third==>', store.getState())
+// store.dispatch({type: '+'});
+// console.log('third==>', store.getState())
+
+const a = () => {
+  console.log('0号中间件');
+  const b = () => console.log('1 号中间件');
+  b();
+}
+
+a();
