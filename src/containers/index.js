@@ -1,6 +1,7 @@
 import ABook from './ABook/ABook';
 import HostPage from './HostPage/HostPage';
 import NotFound from './NotFound/NotFound';
+import HOForm from './HOForm/HOForm';
 import About from './About/About';
 
 import { txtTools } from 'eschew-materials';
@@ -40,6 +41,7 @@ const MenuBuilder = (function () {
 
 
 const displayMenus = MenuBuilder.getInstance()
+  .addMenu('HOForm','定制表单')
   .addMenu('About', '关于')
   .build()
 
@@ -69,7 +71,7 @@ const buildMenus = (containers) => {
   return menus;
 }
 
-const containers = { ABook, HostPage, About, NotFound};
+const containers = { ABook, HostPage,HOForm, About, NotFound};
 const menus = buildMenus(containers);
 containers.Menu = menus;
 
