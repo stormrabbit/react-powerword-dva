@@ -7,15 +7,18 @@ export default {
   namespace: 'example',
 
   state: {
-    formInfo = {}
+    formInfo : {}
   },
 
   subscriptions: {
-    setup({ dispatch, history }) {  // eslint-disable-line
-      history.listen( history2 => {
-        console.log('history==>', history2);
-      })
-    },
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname, query }) => {
+          if (pathname === '/hOForm') {
+              console.log('pathname==>', pathname);
+              dispatch({ type: 'getForm' });
+          }
+      });
+  },
   },
 
   effects: {
@@ -23,7 +26,12 @@ export default {
       yield put({ type: 'save' });
     },
     *getForm(action, {call, put}){
-
+        const data = yield call(getFormInfo);
+        console.log(data);
+        yield put({
+          type: 'save',
+          payload:{formInfo: data.data}
+        })
     }
   },
 

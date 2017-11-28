@@ -12,7 +12,29 @@ import {
 import FormItemBuilder from '../../utils/formItemBuilder';
 function HOForm(props) {
 
-  const tempItem = FormItemBuilder.create('test').setChildNode(Input).build();
+  const ITEMS = {
+    input: Input
+  };
+  const {
+    example: {
+      formInfo 
+    }
+  } = props;
+  // console.log('example==>', example);
+  const {
+    id = 'tt',
+    childNode
+  } = formInfo;
+  let tempItem =  FormItemBuilder
+                    .create(id);
+  if(!!childNode) {
+    tempItem = tempItem.setChildNode(ITEMS[childNode]).build();
+  } else {
+    tempItem = tempItem.setChild(<div />).build();
+  }
+                    
+  // const tempItem = FormItemBuilder.create('test').setChildNode(Input).build();
+  // const tempItem = 
   console.log(tempItem);
   const tempBuild = (formItem, form) => {
     const {

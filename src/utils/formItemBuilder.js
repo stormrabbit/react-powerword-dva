@@ -36,9 +36,9 @@ class FormItemBuilder {
         childNode: ChildNode,
         childNodeProp = {}
       } = formItemObj;
-      // const child = (props) => <ChildNode {...childNodeProp} />;
-      const child = React.createElement(ChildNode, childNodeProp) 
-      formItemObj.child = child;
+      const Child = (props) => <ChildNode />;
+      // const child = React.createElement(ChildNode, childNodeProp) 
+      formItemObj.child = <Child {...childNodeProp} />;
     }
     return formItemObj;
   }

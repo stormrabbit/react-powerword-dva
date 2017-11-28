@@ -7,9 +7,9 @@ export const zeroBuilder = (formItems = [], buildItemFunc, formClass, styles) =>
 
   const ZeroForm = props => {
     return (
-      <Form className={formClass} style= {styles}>
+      <Form className={formClass} style={styles}>
         {
-          formItems.map( formItem => buildItemFunc(formItem, props.form))
+          formItems.map(formItem => buildItemFunc(formItem, props.form))
         }
       </Form>
     );
